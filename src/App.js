@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+
+import Spinner from "./components/Spinner";
+import "./App.css";
 
 function App() {
-  const [text, setText] = useState('');
-  const [tone, setTone] = useState('');
-  const [textResponse, setTextResponse] = useState('');
+  const [text, setText] = useState("");
+  const [tone, setTone] = useState("");
+  const [textResponse, setTextResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/generate-blog', { text, tone });
+      setIsLoading(true);
+      const response = await axios.post("http://localhost:3000/generate-blog", {
+        text,
+        tone,
+      });
       setTextResponse(response.data); // Store the generated text response in state
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -49,17 +58,28 @@ function App() {
             className="select"
           >
             <option value="">Select a tone</option>
-            <option value="Informative and Concise">Informative and Concise</option>
-            <option value="Conversational and Friendly">Conversational and Friendly</option>
-            <option value="Authoritative and Expert">Authoritative and Expert</option>
-            <option value="Engaging and Interactive">Engaging and Interactive</option>
-            <option value="Inspirational and Motivational">Inspirational and Motivational</option>
+            <option value="Informative and Concise">
+              Informative and Concise
+            </option>
+            <option value="Conversational and Friendly">
+              Conversational and Friendly
+            </option>
+            <option value="Authoritative and Expert">
+              Authoritative and Expert
+            </option>
+            <option value="Engaging and Interactive">
+              Engaging and Interactive
+            </option>
+            <option value="Inspirational and Motivational">
+              Inspirational and Motivational
+            </option>
           </select>
         </div>
         <button onClick={handleSubmit} className="button">
           Submit
         </button>
       </div>
+      {!isLoading && <Spinner />}
       {textResponse && (
         <div className="card">
           <p>
