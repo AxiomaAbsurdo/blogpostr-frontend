@@ -62,11 +62,9 @@ function App() {
       </div>
       {textResponse && (
         <div className="card">
-          {textResponse.split(' ').map((word, index) => (
-            <span key={index} className={isTechnicalWord(word) ? 'technical' : ''}>
-              {word}{' '}
-            </span>
-          ))}
+          <p>
+            <blockquote>{textResponse}</blockquote>
+          </p>
         </div>
       )}
     </div>
