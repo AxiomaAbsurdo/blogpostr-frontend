@@ -23,32 +23,43 @@ function App() {
   }
 
   return (
-    <div>
-      <div>
-        <label htmlFor="text-input">Text:</label>
-        <input
-          type="text"
-          id="text-input"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+    <div className="container">
+      <div className="form-container">
+        <h1 className="title">Generate Blog Post</h1>
+        <div>
+          <label htmlFor="text-input" className="label">
+            Topic:
+          </label>
+          <input
+            type="text"
+            id="text-input"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            className="input"
+          />
+        </div>
+        <div>
+          <label htmlFor="tone-select" className="label">
+            Tone:
+          </label>
+          <select
+            id="tone-select"
+            value={tone}
+            onChange={(e) => setTone(e.target.value)}
+            className="select"
+          >
+            <option value="">Select a tone</option>
+            <option value="Informative and Concise">Informative and Concise</option>
+            <option value="Conversational and Friendly">Conversational and Friendly</option>
+            <option value="Authoritative and Expert">Authoritative and Expert</option>
+            <option value="Engaging and Interactive">Engaging and Interactive</option>
+            <option value="Inspirational and Motivational">Inspirational and Motivational</option>
+          </select>
+        </div>
+        <button onClick={handleSubmit} className="button">
+          Submit
+        </button>
       </div>
-      <div>
-        <label htmlFor="tone-select">Tone:</label>
-        <select
-          id="tone-select"
-          value={tone}
-          onChange={(e) => setTone(e.target.value)}
-        >
-          <option value="">Select a tone</option>
-          <option value="Informative and Concise">Informative and Concise</option>
-          <option value="Conversational and Friendly">Conversational and Friendly</option>
-          <option value="Authoritative and Expert">Authoritative and Expert</option>
-          <option value="Engaging and Interactive">Engaging and Interactive</option>
-          <option value="Inspirational and Motivational">Inspirational and Motivational</option>
-        </select>
-      </div>
-      <button onClick={handleSubmit}>Submit</button>
       {textResponse && (
         <div className="card">
           {textResponse.split(' ').map((word, index) => (
