@@ -79,7 +79,7 @@ function App() {
           Submit
         </button>
       </div>
-      {!isLoading && <Spinner />}
+      {isLoading && <Spinner />}
       {textResponse && (
         <div className="card">
           <p>
